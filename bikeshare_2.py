@@ -10,6 +10,25 @@ MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
 
 DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'all']
 
+def check_input(prompt, valid_inputs):
+    """
+    Asks user for input using the supplied prompt, checking against valid inputs.  Repeats prompt until valid input is supplied.
+
+    Args:
+        (str) prompt - prompt string for user input
+        (list) valid_inputs - list of strings that constitute valid input
+    Returns:
+        (str) user_input - valid user input
+    """
+    while True:
+        user_input = input(prompt).lower()
+        if not user_input in valid_inputs:
+            print('\n\tInvalid input!  Please try again.\n')
+            continue
+        break
+
+    return user_input
+
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -20,29 +39,14 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('\nHello! Let\'s explore some US bikeshare data!\n')
-    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    while True:
-        city = input('Enter name of city to analyze (Chicago, New York City, or Washington): ').lower()
-        if not city in CITY_DATA.keys():
-            print('\n\tInvalid input!  Please try again.\n') 
-            continue
-        break
+    # get user input for city (chicago, new york city, washington).
+    city = check_input('Enter name of city to analyze (Chicago, New York City, or Washington): ', CITY_DATA.keys())
 
     # get user input for month (all, january, february, ... , june)
-    while True:
-        month = input('Enter name of month to filter by (January, February, March, April, May, or June), or "all" to apply no month filter: ').lower()
-        if not month in MONTHS:
-            print('\n\tInvalid input!  Please try again.\n')
-            continue
-        break
+    month = check_input('Enter name of month to filter by (January, February, March, April, May, or June), or "all" to apply no month filter: ', MONTHS)
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
-    while True:
-        day = input('Enter name of day of week to filter by, or "all" to apply no day filter: ').lower()
-        if not day in DAYS:
-            print('\n\tInvalid input!  Please try again.\n')
-            continue
-        break
+    day = check_input('Enter name of day of week to filter by, or "all" to apply no day filter: ', DAYS)
 
     print('-'*40)
     return city, month, day
@@ -178,24 +182,16 @@ def raw_data(df):
     """Displays raw data from DataFrame, 5 rows at a time.  Continues until user responds no or there is no more raw data."""
     ind = 0
     while True:
+        #Get user input on whether or not display of raw data is desired
         if ind==0:
-            while True:
-                display_data = input('\nWould you like to display the first 5 rows of raw data?  Enter yes or no.\n').lower()
-                if not display_data in ['yes', 'no']:
-                    print('\n\tInvalid input!  Please try again.\n')
-                    continue
-                break
+            display_data = check_input('\nWould you like to display the first 5 rows of raw data?  Enter yes or no.\n', ['yes', 'no'])
         else:
-            while True:
-                display_data = input('\nWould you like to display the next 5 rows of raw data?  Enter yes or no.\n').lower()
-                if not display_data in ['yes', 'no']:
-                    print('\n\tInvalid input!  Please try again.\n')
-                    continue
-                break
+            display_data = check_input('\nWould you like to display the next 5 rows of raw data?  Enter yes or no.\n', ['yes', 'no'])
             
         if display_data != 'yes':
             break
 
+        #Print 5 rows of data from the DataFrame; if fewer than 5 rows are returned, the end of the data has been reached
         rows_data = df.iloc[ind:ind+5]
         if len(rows_data) < 5:
             print(rows_data)
@@ -217,12 +213,7 @@ def main():
         user_stats(df)
         raw_data(df)
 
-        while True:
-            restart = input('\nWould you like to restart?  Enter yes or no.\n').lower()
-            if not restart in ['yes', 'no']:
-                print('\n\tInvalid input!  Please try again.\n')
-                continue
-            break
+        restart = check_input('\nWould you like to restart?  Enter yes or no.\n', ['yes', 'no'])
         
         if restart != 'yes':
             break
