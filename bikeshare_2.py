@@ -211,6 +211,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
+        pd.set_option("display.max_columns", 200) #Set option to ensure all columns of raw data are displayed
         raw_data(df)
 
         restart = check_input('\nWould you like to restart?  Enter yes or no.\n', ['yes', 'no'])
