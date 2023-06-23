@@ -14,3 +14,8 @@ Created as a project submission for the Udacity course _Programming for Data Sci
 * chicago.csv
 * new_york_city.csv
 * washington.csv
+
+## Usage
+Run the script using Python 3, e.g.
+`python bikeshare_2.py`
+The script **must** be run from a directory containing the data files.  Then, follow the prompts that appear to select the desired data for view.
