@@ -178,6 +178,7 @@ def raw_data(df):
     """Displays raw data from DataFrame, 5 rows at a time.  Continues until user responds no or there is no more raw data."""
     ind = 0
     while True:
+        #Get user input on whether or not display of raw data is desired
         if ind==0:
             while True:
                 display_data = input('\nWould you like to display the first 5 rows of raw data?  Enter yes or no.\n').lower()
@@ -196,6 +197,7 @@ def raw_data(df):
         if display_data != 'yes':
             break
 
+        #Print 5 rows of data from the DataFrame; if fewer than 5 rows are returned, the end of the data has been reached
         rows_data = df.iloc[ind:ind+5]
         if len(rows_data) < 5:
             print(rows_data)
