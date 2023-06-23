@@ -10,6 +10,8 @@ MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
 
 DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'all']
 
+YES_NO = ['yes', 'no']
+
 def check_input(prompt, valid_inputs):
     """
     Asks user for input using the supplied prompt, checking against valid inputs.  Repeats prompt until valid input is supplied.
@@ -184,9 +186,9 @@ def raw_data(df):
     while True:
         #Get user input on whether or not display of raw data is desired
         if ind==0:
-            display_data = check_input('\nWould you like to display the first 5 rows of raw data?  Enter yes or no.\n', ['yes', 'no'])
+            display_data = check_input('\nWould you like to display the first 5 rows of raw data?  Enter yes or no.\n', YES_NO)
         else:
-            display_data = check_input('\nWould you like to display the next 5 rows of raw data?  Enter yes or no.\n', ['yes', 'no'])
+            display_data = check_input('\nWould you like to display the next 5 rows of raw data?  Enter yes or no.\n', YES_NO)
             
         if display_data != 'yes':
             break
@@ -214,7 +216,7 @@ def main():
         pd.set_option("display.max_columns", 200) #Set option to ensure all columns of raw data are displayed
         raw_data(df)
 
-        restart = check_input('\nWould you like to restart?  Enter yes or no.\n', ['yes', 'no'])
+        restart = check_input('\nWould you like to restart?  Enter yes or no.\n', YES_NO)
         
         if restart != 'yes':
             break
